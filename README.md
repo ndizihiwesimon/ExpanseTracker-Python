@@ -4,11 +4,11 @@ This is the python application for tracking the expenses
 ## Guide
 
 The application runs until user selects 4 (Exit)  
-Menu:
+Menu:  
 1. Add an expense
 2. View expenses by category
 3. Calculate total expenses
-4. Exit
+4. Exit  
 Enter your selection: 1
 
 ### Image (Sample output)
