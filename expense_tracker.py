@@ -11,7 +11,7 @@ Name: Simon Pierre Ndizihiwe
 Andrew ID: sndizihi@andrew.cmu.edu
 Semester: Summer 2023
 Course: Introduction to Python
-Last modified: Sunday, 25 June 2023
+Last modified: Friday, 30 June 2023
 ******************************************************
 
 """
@@ -44,14 +44,26 @@ def add_expense(category: str, amount: float):
 
 
 def dump_expenses(file_path='expenses.txt'):
+   """Dumps the content of the list to a file
+
+      Returns: None
+
+      Args:
+         - file_path: the location of the output file. type 'string'
+   """
    global expenses
+   #TODO: Open the file by overriding its content first (https://docs.python.org/3/tutorial/inputoutput.html#tut-files)
+   #TODO: For each tuple in the `expenses`' list, write a line in the file in the CSV format (e.g., Clothes,10.05)
+   # Use a precision of 2 decimal points for the amount.
 
    # Open the file in write mode, overriding its content
-   with open(file_path, 'w') as f:
+   with open(file_path, 'w', encoding="utf-8") as f:
     #   for each tuple in the `expenses` list, write a line in the CSV format (e.g., Clothes,10.05)
-    for category, amount in expenses:
-       line = f"{category},{amount:.2f}\n" # Format the line with 2 decimal points precision for the amount
-       f.write(line)
+    for i, (category, amount) in enumerate(expenses):
+       if i == len(expenses) - 1:
+          f.write(f"{category},{amount:.2f}")
+       else:
+          f.write(f"{category},{amount:.2f}\n")
 
 
 def read_expenses(file_path='expenses.txt'):
@@ -128,11 +140,12 @@ def get_menu_action() -> int:
 
 
 def print_expense(expense: Tuple[str, float]) -> str:
-   category, amount = expense
+   category = expense[0]
+   amount = float(expense[1])
 
    # Format category and amount strings with the desired width and precision
-   formatted_category = category.ljust(10)[:10]
-   formatted_amount = f"${amount:.2f}".ljust(10)[:10]
+   formatted_category = f"{category[:10]:<10}"
+   formatted_amount = f"${amount:<10.2f}"
 
    # Construct the output string using the formatted category and amount
    output = f"|{formatted_category}|{formatted_amount}|"
